@@ -1,0 +1,80 @@
+<html>
+ <head>
+ 	<meta charset="UTF-8">
+ 	<style>
+td {border:2px solid darkGray;text-align:center}
+table.dikens th, table.dikens td {
+    border: 2px solid darkGray;
+    text-align: center;
+}
+table.dikens {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+p    {color: red;}
+</style>
+	<script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.js"></script>
+ </head>
+ <body>
+ 	<table class="dikens">
+		<tr>
+			<th colspan="2" class="title">ΥΠΟΛΟΓΙΣΜΟΣ ΔΙΚΑΣΤΙΚΟΥ ΕΝΣΗΜΟΥ</th>
+		</tr>
+		<tr>
+			<th class="kefalaio">ΕΙΣΑΓΕΤΕ ΤΟ ΚΕΦΑΛΑΙΟ</th>
+			<td class="kefalaio"><input type="text" name="kefalaio" id="dikens_kefalaio" /></td>
+		</tr>
+		<tr>
+			<th class="kefalaio">ΚΕΦΑΛΑΙΟ ΠΟΥ ΔΩΣΑΤΕ (επιβεβαίωση)</th>
+			<td id="dikens_kefalaio_given"></td>
+		</tr>		
+		<tr>
+			<th>ΔΙΚΑΣΤΙΚΟ ΕΝΣΗΜΟ (ΚΑΕ 2375) - 8‰ ΚΕΦΑΛΑΙΟΥ</th>
+			<td id="dikens_dikens">&nbsp;</td>
+		</tr>
+		<tr>
+			<th>ΥΠΕΡ ΤΑΧΔΙΚ (ΚΑΕ 82639) - 20% ΔΙΚΑΣΤΙΚΟΥ ΕΝΣΗΜΟΥ</th>
+			<td id="dikens_taxdik">&nbsp;</td>
+		</tr>
+		<tr>
+			<th>ΥΠΕΡ Ε.Ο.Π.Υ.Υ. (ΚΑΕ 83937) - 5% ΔΙΚΑΣΤΙΚΟΥ ΕΝΣΗΜΟΥ</th>
+			<td id="dikens_ygeias">&nbsp;</td>
+		</tr>
+		<tr>
+			<th>ΥΠΕΡ ΤΑΜΕΙΟΥ ΝΟΜΙΚΩΝ (ΚΑΕ 82623) - 10% ΔΙΚΑΣΤΙΚΟΥ ΕΝΣΗΜΟΥ</th>
+			<td id="dikens_nomikon">&nbsp;</td>
+		</tr>		
+		<tr>
+			<th>ΠΑΡΑΒΟΛΟ ΧΑΡΤΟΣΗΜΟΥ (ΚΑΕ 1229) - 2% ΔΙΚΑΣΤΙΚΟΥ ΕΝΣΗΜΟΥ</th>
+			<td id="dikens_xartosimo">&nbsp;</td>
+		</tr>		
+		<tr>
+			<th>ΥΠΕΡ ΟΓΑ (ΚΑΕ 1228) - 20% ΠΑΡΑΒΟΛΟΥ ΧΑΡΤΟΣΗΜΟΥ</th>
+			<td id="dikens_oga">&nbsp;</td>
+		</tr>
+		<tr>
+			<th class="synolo">ΣΥΝΟΛΟ</th>
+			<td id="dikens_total" class="synolo">&nbsp;</td>
+		</tr>
+	</table>
+	<script>
+	$('#dikens_kefalaio').keyup(function(){
+	var epivevaiwsh = $('#dikens_kefalaio').val();
+	var dikastiko_ensimo = parseFloat((epivevaiwsh * 0.008));
+	var tax_dik = parseFloat((dikastiko_ensimo * 0.20));
+	var xartosimo = parseFloat((dikastiko_ensimo * 0.024));
+	var eopi = parseFloat((dikastiko_ensimo * 0.05));
+	var sunolo = parseFloat((dikastiko_ensimo + tax_dik + xartosimo + eopi));
+	$('#dikens_kefalaio_given').html(epivevaiwsh);
+	$('#dikens_dikens').html(dikastiko_ensimo.toFixed(2));
+	$('#dikens_taxdik').html(tax_dik.toFixed(2));
+	$('#dikens_xartosimo').html(xartosimo.toFixed(2));
+   $('#dikens_ygeias').html(eopi.toFixed(2));
+   $('#dikens_total').html(sunolo.toFixed(2));
+	
+	});
+	</script>
+ </body>
+</html>
